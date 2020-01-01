@@ -4,9 +4,9 @@ class Word
   @@words = {}
   @@total_rows = 0
 
-  def initialize(name, id)
-    @name = name
-    @id = id || @@total_rows += 1
+  def initialize(attributes)
+    @name = attributes.fetch(:name)
+    @id = attributes.fetch(:id) || @@total_rows += 1
   end
 
   def self.all
@@ -14,7 +14,7 @@ class Word
   end
 
   def save
-    @@words[self.id] = Word.new(self.name, self.id)
+    @@words[self.id] = Word.new({:name => self.name, :id => self.id})
   end
 
   def ==(other_word)

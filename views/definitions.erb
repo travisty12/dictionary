@@ -1,0 +1,33 @@
+<h1>Definitions!!</h1>
+
+<h3>Created Definitions:</h3>
+
+<% if @definitions.any? %>
+  <ul>
+    <% @definitions.each do |definition| %>
+      <li><a href="/words/<%= definition.word_id %>/definitions/<%= definition.id %>"><%= definition.word.name %>: <%= definition.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no definitions to display.</p>
+<% end %>
+
+<a href="/words/new">Add a new word</a>
+
+<form action="/words">
+  <div class="form-group">
+    <label for="search">Search By Words</label>
+    <input id="search" name="search" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Go!</button>
+</form>
+
+<form action="/definitions">
+  <div class="form-group">
+    <label for="search">Search By Definition</label>
+    <input id="search" name="search" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Go!</button>
+</form>
+<p><a href="/words">All words</a></p>
+<p><a href="/">Home</a></p>

@@ -5,10 +5,10 @@ class Definition
   @@definitions = {}
   @@total_rows = 0
 
-  def initialize(name, word_id, id)
-    @name = name
-    @word_id = word_id
-    @id = id || @@total_rows += 1
+  def initialize(attributes)
+    @name = attributes.fetch(:name)
+    @word_id = attributes.fetch(:word_id)
+    @id = attributes.fetch(:id) || @@total_rows += 1
   end
 
   def ==(other_def)
@@ -24,7 +24,7 @@ class Definition
   end
 
   def save
-    @@definitions[self.id] = Definition.new(self.name, self.word_id, self.id)
+    @@definitions[self.id] = Definition.new({:name => self.name, :word_id => self.word_id, :id => self.id})
   end
 
   def self.find(id)
@@ -48,7 +48,7 @@ class Definition
   def update(name, word_id)
     self.name = name
     self.word_id = word_id
-    @@definitions[self.id] = Definition.new(self.name, self.word_id, self.id)
+    @@definitions[self.id] = Definition.new({:name => self.name, :word_id => self.word_id, :id => self.id})
   end
 
   def delete
